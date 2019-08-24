@@ -2,11 +2,10 @@
 import lib.adbUtils
 import re
 import lib.Utils as U
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 16/11/15 下午1:44
+
 """
 
 
@@ -25,6 +24,7 @@ class InstallApp:
         U.Logging.info("start install app for %s" % self.serial)
         process = adb.adb("-s %s install -r %s '%s'" % (self.serial, opts, self.package.apk_path))
         stdout, stderr = process.communicate()
+        stdout, stderr = str(stdout, encoding='utf-8'), str(stderr, encoding='utf-8')
         fails = re.findall(r"Failure\s[[][\w|\W]+[]]", stdout)
         if fails:
             U.Logging.error(fails)

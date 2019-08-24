@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 16/11/16 下午3:25
 """
 try:
     from setuptools import setup, find_packages
@@ -17,8 +15,8 @@ setup(
     packages=find_packages(),
     url='',
     license='MIT',
-    author='xaiqing',
-    author_email='xiaqing@cmcm.cosudom',
+    author='',
+    author_email='',
     description='',
     install_requires=[
         'pyyaml', 'Appium-Python-Client', 'selenium', 'termcolor', 'uiautomator', 'click'

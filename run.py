@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
 
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 18/3/13 下午3:55
+fork from https://github.com/q88535448/AiMonkey
 """
 import signal
 import click
@@ -17,7 +16,7 @@ import lib.Utils as U
 def sigint_handler(signum, frame):
     global is_sigint_up
     is_sigint_up = True
-    print 'catched interrupt signal!'
+    print('catched interrupt signal!')
 
 
 signal.signal(signal.SIGINT, sigint_handler)
@@ -67,7 +66,7 @@ def run_monkey(s, p, apk, mode, runningminutes, throttle, pctuiautomatormix):
         else:
             U.Logging.error(u"-p与--apk至少要填写一个参数")
 
-    except Exception, e:
+    except Exception as e:
         # 异常退出保存log
         U.Logging.error(e)
         for serial in processdic:

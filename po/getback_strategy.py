@@ -53,11 +53,12 @@ class r(threading.Thread):
             #     break
 
             sleep(self.throttle)
-            # 每隔10s进行一次判断如果处于同一个activity则back
-            if during % 10 == 0:
+            # 每隔100s进行一次判断如果处于同一个activity则back
+            if during % 100 == 0:
                 if act_diff == activity and not activity in BLACK_ACTIVITY:
-                    U.Logging.warn("10s activity 未发生改变，get back")
-                    adb.send_key_event("4")
+                    # U.Logging.warn("100s activity 未发生改变，get back")
+                    # adb.send_key_event("4")
+                    pass
                 else:
                     act_diff = activity
 

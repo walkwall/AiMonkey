@@ -9,17 +9,16 @@ import lib.adbUtils
 import time
 import lib.Utils as U
 
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 16/11/15 下午1:44
+
 """
 
 
 
 LOG_ROOT = "logs"
-HISTORY_ROOT = "history_logs"
+HISTORY_ROOT = "logs_history"
 
 
 class Al:
@@ -187,7 +186,7 @@ class DeviceLog:
                         # 清空
                         anr_info = []
                 # CRASH处理
-                if line.startswith("// CRASH: {} ".format(self.pkgname)) or line.startswith(
+                if line.startswith("//  CRASH:{} ".format(self.pkgname)) or line.startswith(
                         "// CRASH: {}:".format(self.pkgname)):
                     is_crash = True
                     crash_cnt += 1
@@ -245,7 +244,7 @@ class DeviceLog:
         for fn_add in crash_fn_list:
             flag = True
             for fn in att_list:
-                print filecmp.cmp(self.crash_dir + "/" + fn_add, fn)
+                print(filecmp.cmp(self.crash_dir + "/" + fn_add, fn))
                 if filecmp.cmp(self.crash_dir + "/" + fn_add, fn):
                     fn_name = fn.split('/')[-1]
                     crash_dic[fn_name] = crash_dic[fn_name] + 1
@@ -260,7 +259,8 @@ class DeviceLog:
                 pa = re.compile(r"leakcanary")
                 if not pa.match(firstline):
                     att_list.append(os.path.join(self.crash_dir, fn_add))
-        print crash_dic, att_list
+        print(crash_dic)
+        print(att_list)
         # for fn in crash_fn_list:
         #     att_list.append(os.path.join(self.crash_dir, fn))
         for fn in dumpsys_fn_list:

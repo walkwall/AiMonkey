@@ -4,11 +4,10 @@ from uiautomator import Device
 from lib.adbUtils import ADB
 import lib.Utils as U
 import time
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 16/11/15 下午1:44
+
 """
 
 def click_premission(d):
@@ -93,7 +92,7 @@ class LoginApp:
 
 if __name__ == '__main__':
     import lib.package
-    package = lib.package.Package('/Users/xiaqing/PycharmProjects/PrivateCloudAutotestPlatform/apks/Launcher/launcher_2018-03-09_17-59-42_r_v52210_official%28no_channel%29_resguard.apk')
+    package = lib.package.Package('/Users/mingtang/PycharmProjects/PrivateCloudAutotestPlatform/apks/Launcher/launcher_2018-03-09_17-59-42_r_v52210_official%28no_channel%29_resguard.apk')
     package.get_package()
     login = LoginApp('0623ea5a00609f1f', package)
     login.login_app()

@@ -72,32 +72,32 @@ class ADB(object):
         """
         获取设备状态： offline | bootloader | device
         """
-        return self.adb("get-state").stdout.read().strip()
+        return self.adb("get-state").stdout.read().decode().strip()
 
     def get_device_id(self):
         """
         获取设备id号，return serialNo
         """
-        return self.adb("get-serialno").stdout.read().strip()
+        return self.adb("get-serialno").stdout.read().decode().strip()
 
     def get_android_version(self):
         """
         获取设备中的Android版本号，如4.2.2
         """
         return self.shell(
-            "getprop ro.build.version.release").stdout.read().strip()
+            "getprop ro.build.version.release").stdout.read().decode().strip()
 
     def get_sdk_version(self):
         """
         获取设备SDK版本号
         """
-        return self.shell("getprop ro.build.version.sdk").stdout.read().strip()
+        return self.shell("getprop ro.build.version.sdk").stdout.read().decode().strip()
 
     def get_device_model(self):
         """
         获取设备型号
         """
-        return self.shell("getprop ro.product.model").stdout.read().strip()
+        return self.shell("getprop ro.product.model").stdout.read().decode().strip()
 
     def get_pid(self, package_name):
         """
@@ -133,11 +133,11 @@ class ADB(object):
         注：杀死系统应用进程需要root权限
         """
         if self.shell("kill %s" %
-                              str(pid)).stdout.read().split(": ")[-1] == "":
+                              str(pid)).stdout.read().decode().split(": ")[-1] == "":
             return "kill success"
         else:
             return self.shell("kill %s" %
-                              str(pid)).stdout.read().split(": ")[-1]
+                              str(pid)).stdout.read().decode().split(": ")[-1]
 
     def quit_app(self, package_name):
         """
@@ -153,7 +153,7 @@ class ADB(object):
     #     pattern = re.compile(r"[a-zA-Z0-9.]+/.[a-zA-Z0-9.]+")
     #     out = self.shell(
     #         "dumpsys window w | %s \/ | %s name=" %
-    #         (find_util, find_util)).stdout.read().strip()
+    #         (find_util, find_util)).stdout.read().decode().strip()
     #
     #     return pattern.findall(out)[0]
 
@@ -165,11 +165,11 @@ class ADB(object):
         if apilevel < 26:
             out = self.shell(
                 "dumpsys activity activities | %s mFocusedActivity" %
-                find_util).stdout.read().strip().split(' ')[3]
+                find_util).stdout.read().decode().strip().split(' ')[3]
         else:
             out = self.shell(
                 "dumpsys activity activities | %s ResumedActivity" %
-                find_util).stdout.read().strip().split(' ')[3]
+                find_util).stdout.read().decode().strip().split(' ')[3]
         return out
 
     def get_current_package_name(self):
@@ -189,7 +189,7 @@ class ADB(object):
         获取电池电量
         """
         level = self.shell("dumpsys battery | %s level" %
-                           find_util).stdout.read().split(": ")[-1]
+                           find_util).stdout.read().decode().split(": ")[-1]
 
         return int(level)
 
@@ -232,7 +232,7 @@ class ADB(object):
                        4: "BATTERY_STATUS_NOT_CHARGING",
                        5: "BATTERY_STATUS_FULL"}
         status = self.shell("dumpsys battery | %s status" %
-                            find_util).stdout.read().split(": ")[-1]
+                            find_util).stdout.read().decode().split(": ")[-1]
 
         return status_dict[int(status)]
 
@@ -241,7 +241,7 @@ class ADB(object):
         获取电池温度
         """
         temp = self.shell("dumpsys battery | %s temperature" %
-                          find_util).stdout.read().split(": ")[-1]
+                          find_util).stdout.read().decode().split(": ")[-1]
 
         return int(temp) / 10.0
 
@@ -308,11 +308,11 @@ class ADB(object):
         usage: getAppStartTotalTime("com.android.settings/.Settings")
         """
         time = self.shell("am start -W %s | %s TotalTime" %
-                          (component, find_util)).stdout.read().split(": ")[-1]
+                          (component, find_util)).stdout.read().decode().split(": ")[-1]
         return int(time)
 
     def get_api_level(self):
-        apilevel = self.shell('getprop ro.build.version.sdk').stdout.read().strip()
+        apilevel = self.shell('getprop ro.build.version.sdk').stdout.read().decode().strip()
         return apilevel
 
     def install_app(self, app_file):
@@ -403,7 +403,7 @@ class ADB(object):
         """
         if "Success" in self.shell(
                         "pm clear %s" %
-                        packageName).stdout.read().splitlines():
+                        packageName).stdout.read().decode().splitlines():
             return "clear user data success "
         else:
             return "make sure package exist"
@@ -679,7 +679,8 @@ class ADB(object):
             if i != "":
                 out.append(i)
         length = len(out)
-        for i in xrange(length):
+        # for i in xrange(length):
+        for i in range(0, length):
             self.shell("input text %s" % out[i])
             # if i != length - 1:
             #     self.sendKeyEvent(keycode.SPACE)
@@ -1010,4 +1011,4 @@ class ADB(object):
 
 if __name__ == "__main__":
     A = ADB()
-    print A.get_focused_package_and_activity()
+    print(A.get_focused_package_and_activity())

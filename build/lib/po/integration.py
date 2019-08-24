@@ -10,11 +10,10 @@ from public.InstallApp import InstallApp
 from public.login import LoginApp
 from lib.adbUtils import ADB
 
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 16/11/15 下午1:44
+
 """
 
 

@@ -678,7 +678,7 @@ class ADB(object):
             if i != "":
                 out.append(i)
         length = len(out)
-        for i in xrange(length):
+        for i in range(0, length):
             self.shell("input text %s" % out[i])
             # if i != length - 1:
             #     self.sendKeyEvent(keycode.SPACE)
@@ -1009,4 +1009,4 @@ class ADB(object):
 
 if __name__ == "__main__":
     A = ADB()
-    print A.get_focused_package_and_activity()
+    print(A.get_focused_package_and_activity())

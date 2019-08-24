@@ -11,11 +11,10 @@ from public.login import LoginApp
 from lib.adbUtils import ADB
 from lib.adbUtils import system
 
-__author__ = 'xiaqing'
+__author__ = ''
 
 """
-@author:xiaqing
-@time: 16/11/15 下午1:44
+
 """
 
 
@@ -77,6 +76,7 @@ class RunMonkey(object):
         U.Logging.info("push the monkey jars to %s" % self.serial)
         process = self.adb.adb('push conf/lib/framework.jar /sdcard/')
         stdout, stderr = process.communicate()
+        stdout, stderr = str(stdout, encoding='utf-8'), str(stderr, encoding='utf-8')
         if 'error' in stdout:
             U.Logging.error(stdout)
             return False

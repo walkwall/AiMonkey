@@ -41,6 +41,7 @@ class Package:
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1,
                          close_fds=True)
         stdout, stderr = process.communicate()
+        stdout, stderr = str(stdout, encoding='utf-8'), str(stderr, encoding='utf-8')
         if stdout is None:
             U.Logging.error("[pkg_info] time out: {}".format(cmd))
         elif "ERROR" in stderr:
@@ -58,6 +59,7 @@ class Package:
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1,
                                    close_fds=True)
         stdout, stderr = process.communicate()
+        stdout, stderr = str(stdout, encoding='utf-8'), str(stderr, encoding='utf-8')
         if stdout is None:
             U.Logging.error("[pkg_info] time out: {}".format(cmd))
         elif "ERROR" in stderr:

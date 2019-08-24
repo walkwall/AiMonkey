@@ -1,1 +1,6 @@
 *.pyc
+.DS_Store
+.idea
+conf/.DS_Store
+logs
+logs_history

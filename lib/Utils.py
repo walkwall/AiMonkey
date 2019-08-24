@@ -9,7 +9,7 @@ import time
 import subprocess
 import os
 import sys
-import ConfigParser
+import configparser
 import sqlite3
 import re
 
@@ -31,7 +31,7 @@ class ConfigIni():
         self.current_directory = os.path.split(
             os.path.realpath(sys.argv[0]))[0]
         self.path = os.path.split(__file__)[0].replace('lib','data/test_info.ini')
-        self.cf = ConfigParser.ConfigParser()
+        self.cf = configparser.ConfigParser()
 
         self.cf.read(self.path)
 

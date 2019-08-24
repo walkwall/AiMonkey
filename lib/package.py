@@ -44,6 +44,7 @@ class Package:
         cmd = '{} dump badging "{}" | {} package'.format(aaptpath, self.apk_path, find_util)
         process = U.cmd(cmd)
         stdout, stderr = process.communicate()
+        stdout, stderr = str(stdout, encoding='utf-8'), str(stderr, encoding='utf-8')
         if stdout is None:
             U.Logging.error("[pkg_info] time out: {}".format(cmd))
         elif "ERROR" in stderr or "error" in stderr:
@@ -60,6 +61,7 @@ class Package:
         cmd = '{} dump badging "{}" | {} launchable-activity'.format(aaptpath, self.apk_path, find_util)
         process = U.cmd(cmd)
         stdout, stderr = process.communicate()
+        stdout, stderr = str(stdout, encoding='utf-8'), str(stderr, encoding='utf-8')
         if stdout is None:
             U.Logging.error("[pkg_info] time out: {}".format(cmd))
         elif "ERROR" in stderr or "error" in stderr:
